@@ -1,0 +1,683 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "proto/v1/gomlapi/gomlapi.proto",
+    "version": "version not set"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/api/config": {
+      "put": {
+        "summary": "Goml의 시스템 정보를 설정합니다.",
+        "operationId": "SetConfig",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "properties": {}
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/gomlapiSetConfigRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Gomlapi"
+        ]
+      }
+    },
+    "/v1/api/container": {
+      "post": {
+        "summary": "Node에 컨테이너를 생성합니다.",
+        "operationId": "CreateContainer",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/gomlapiCreateContainerResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/gomlapiCreateContainerRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Gomlapi"
+        ]
+      }
+    },
+    "/v1/api/container/start/{node_id}/{container_id}": {
+      "put": {
+        "summary": "컨테이너를 시작합니다.",
+        "operationId": "StartContainer",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "properties": {}
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "node_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "container_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Gomlapi"
+        ]
+      }
+    },
+    "/v1/api/container/stop/{node_id}/{container_id}": {
+      "put": {
+        "summary": "컨테이너를 중지합니다.",
+        "operationId": "StopContainer",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "properties": {}
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "node_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "container_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Gomlapi"
+        ]
+      }
+    },
+    "/v1/api/container/{node_id}/{container_id}": {
+      "delete": {
+        "summary": "컨테이너를 삭제합니다.",
+        "operationId": "DeleteContainer",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "properties": {}
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "node_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "container_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Gomlapi"
+        ]
+      }
+    },
+    "/v1/api/node/{node_address}": {
+      "get": {
+        "summary": "Node를 조회합니다.",
+        "operationId": "GetNode",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/gomlapiGetNodeResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "node_address",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Gomlapi"
+        ]
+      }
+    },
+    "/v1/api/nodes": {
+      "get": {
+        "summary": "Node 목록을 조회합니다.",
+        "operationId": "GetNodeList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/gomlapiGetNodeListResponse"
+            }
+          }
+        },
+        "tags": [
+          "Gomlapi"
+        ]
+      }
+    },
+    "/v1/api/system": {
+      "get": {
+        "summary": "Goml 시스템의 상태를 조회합니다.",
+        "operationId": "GetSystem",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/gomlapiGetSystemResponse"
+            }
+          }
+        },
+        "tags": [
+          "Gomlapi"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "commonContainer": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "names": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "image": {
+          "type": "string"
+        },
+        "image_id": {
+          "type": "string"
+        },
+        "command": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "int64"
+        },
+        "ports": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/commonPort"
+          }
+        },
+        "size_rw": {
+          "type": "string",
+          "format": "int64"
+        },
+        "size_root_fs": {
+          "type": "string",
+          "format": "int64"
+        },
+        "labels": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "state": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "host_config": {
+          "$ref": "#/definitions/commonNetworkMode"
+        },
+        "mounts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/commonMountPoint"
+          }
+        },
+        "env": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "commonContainerConfig": {
+      "type": "object",
+      "properties": {
+        "hostname": {
+          "type": "string"
+        },
+        "domainname": {
+          "type": "string"
+        },
+        "user": {
+          "type": "string"
+        },
+        "exposed_ports": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "env": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "image": {
+          "type": "string"
+        },
+        "volumes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "working_dir": {
+          "type": "string"
+        },
+        "labels": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "commonGPUStatus": {
+      "type": "object",
+      "properties": {
+        "index": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "memory_total_size": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "memory_used_size": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "temperature": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "commonImageInspect": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "type": "string"
+        },
+        "repo_tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "repo_digests": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "parent": {
+          "type": "string"
+        },
+        "comment": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string"
+        },
+        "container": {
+          "type": "string"
+        },
+        "container_config": {
+          "$ref": "#/definitions/commonContainerConfig"
+        },
+        "docker_version": {
+          "type": "string"
+        },
+        "author": {
+          "type": "string"
+        },
+        "config": {
+          "$ref": "#/definitions/commonContainerConfig"
+        },
+        "architecture": {
+          "type": "string"
+        },
+        "os": {
+          "type": "string"
+        },
+        "os_version": {
+          "type": "string"
+        },
+        "size": {
+          "type": "string",
+          "format": "int64"
+        },
+        "virtual_size": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "commonMountPoint": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        },
+        "destination": {
+          "type": "string"
+        },
+        "driver": {
+          "type": "string"
+        },
+        "mode": {
+          "type": "string"
+        },
+        "rw": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "propagation": {
+          "type": "string"
+        }
+      }
+    },
+    "commonNetworkMode": {
+      "type": "object",
+      "properties": {
+        "network_mode": {
+          "type": "string"
+        }
+      }
+    },
+    "commonNode": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "alias": {
+          "type": "string"
+        },
+        "hostname": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "gpu_statuses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/commonGPUStatus"
+          }
+        },
+        "containers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/commonContainer"
+          }
+        }
+      }
+    },
+    "commonNodeSummary": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "alias": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "hostname": {
+          "type": "string"
+        }
+      }
+    },
+    "commonPort": {
+      "type": "object",
+      "properties": {
+        "ip": {
+          "type": "string"
+        },
+        "private_port": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "public_port": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "gomlapiConfig": {
+      "type": "object",
+      "properties": {
+        "node_id": {
+          "type": "string"
+        },
+        "nodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/commonNodeSummary"
+          }
+        },
+        "images": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "image_inspects": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/commonImageInspect"
+          }
+        }
+      }
+    },
+    "gomlapiCreateContainerRequest": {
+      "type": "object",
+      "properties": {
+        "node_id": {
+          "type": "string"
+        },
+        "image_name": {
+          "type": "string"
+        },
+        "container_name": {
+          "type": "string"
+        },
+        "labels": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "volumes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "envs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ports": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "auto_port": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "CreateContainer"
+    },
+    "gomlapiCreateContainerResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "gomlapiGetNodeListResponse": {
+      "type": "object",
+      "properties": {
+        "nodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/commonNode"
+          }
+        }
+      }
+    },
+    "gomlapiGetNodeResponse": {
+      "type": "object",
+      "properties": {
+        "node_id": {
+          "type": "string"
+        },
+        "node_alias": {
+          "type": "string"
+        },
+        "hostname": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        }
+      }
+    },
+    "gomlapiGetSystemResponse": {
+      "type": "object",
+      "properties": {
+        "system": {
+          "$ref": "#/definitions/gomlapiSystem"
+        }
+      }
+    },
+    "gomlapiGomlapiState": {
+      "type": "string",
+      "enum": [
+        "IDLE",
+        "INITIALIZING",
+        "IMAGE_PULLING",
+        "IMAGE_PULLING_FAIL"
+      ],
+      "default": "IDLE"
+    },
+    "gomlapiSetConfigRequest": {
+      "type": "object",
+      "properties": {
+        "config": {
+          "$ref": "#/definitions/gomlapiConfig"
+        }
+      },
+      "title": "SetConfig"
+    },
+    "gomlapiSystem": {
+      "type": "object",
+      "properties": {
+        "config": {
+          "$ref": "#/definitions/gomlapiConfig"
+        },
+        "state": {
+          "$ref": "#/definitions/gomlapiGomlapiState"
+        },
+        "logs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

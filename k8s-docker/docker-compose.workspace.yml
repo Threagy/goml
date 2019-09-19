@@ -1,0 +1,45 @@
+version: '2.3'
+
+services:
+  workspace:
+    image: '${PRIVATE_REGISTRY}/workspace:${VERSION}-dev'
+    build:
+      context: .
+      dockerfile: ./workspace/dev.Dockerfile
+      target: dev
+    working_dir: /root/repos
+    runtime: nvidia
+    volumes:
+      - ./dist:/dist
+      - ~/.ssh:/root/.temp/.ssh
+      - ~/.gitconfig:/root/.temp/.gitconfig
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - goml_repos_data:/root/repos
+      - goml_vscode_data:/root/.vscode-server
+      - goml_vscode_insider_data:/root/.vscode-server-insiders
+      - goml_py_data:/root/.local
+      - goml_go_data:/go
+    hostname: workspace
+    networks:
+      - net_workspace
+    ports:
+      - '8023:22'
+      - '7777:7777'
+      - '7778:8080'
+    environment:
+      - COMPOSE_PROJECT_NAME=${COMPOSE_PROJECT_NAME}
+
+networks:
+  net_workspace:
+
+volumes:
+  goml_repos_data:
+    external: true
+  goml_vscode_data:
+    external: true
+  goml_vscode_insider_data:
+    external: true
+  goml_go_data:
+    external: true
+  goml_py_data:
+    external: true

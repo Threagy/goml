@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+// https://cloud.google.com/apis/design/naming_convention
+
+import "proto/v1/user/user-common.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+
+package proto.user;
+
+option go_package = "github.com/goml/gomlet/proto/v1/user";
+
+service UserManager {
+    //
+    rpc GetUsers(GetUsersRequest) returns (GetUsersResponse) {
+        option (google.api.http) = {
+            get: "/v1/users"
+        };
+    }
+
+    //
+    rpc ModifyUser(ModifyUserRequest) returns (google.protobuf.Empty) {
+        option (google.api.http) = {
+            put: "/v1/user"
+            body: "*"
+        };
+    }
+
+    //
+    rpc DeleteUser(DeleteUserRequest) returns (google.protobuf.Empty) {
+        option (google.api.http) = {
+            delete: "/v1/user/{user_id}"
+        };
+    }
+
+}

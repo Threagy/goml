@@ -1,0 +1,84 @@
+### Login
+POST http://{{host}}:{{port}}/v1/auth/login HTTP/1.1
+content-type: application/json
+
+{
+  "user_id": "demo",
+  "password": "demo"
+}
+
+### NewUser
+POST http://{{host}}:{{port}}/v1/auth/user HTTP/1.1
+content-type: application/json
+
+{
+  "user_id": "demo3",
+  "password": "demo3",
+  "name": "demo3_name"
+}
+
+@token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTcyMjA5NjQsIlRva2VuVHlwZSI6ImxldmVsMSIsInVzZXJfaWQiOiJkZW1vIiwiUGFzc3dvcmQiOiJyZW1vdmVkIiwiTmFtZSI6ImRlbW9fbmFtZSIsIlJvbGUiOjB9.PPH6QGhkP9sb3yPSFEomwWSesgmTzRT1RkgfRvETl52ZxGO1MwvB5P29qSK2DJMw0suZsGVW96p1GMVJQDHdstx9iMcKhnkLSyc2ZLPTM41mInwt8q6tjjUsrXgbqqIIqLXoNgzk_1JTE3uCQ7aRjw_qnhsEaM7v2PIrAzy36e3ALqC45IsGSu53oZbgbOlEDOTEkwrbZJ5s0V7uAUZwOQMhN4Fp_PymU5OT58K9Mz66dVBHB9wf49dvrclYWIXqSqcPtJWlJx29zQYMNWwJuMEkTiCwtB4-9spVKnaG2-cLCP8vDgz5uSdeG6dHCkjFngL-sPu3Ck_OvxQvZTwJvDyqrcUeSUeiQR0g1p3ADcir7qT7Az42BHTVjGGIxN5Lj9OGZWgiT-OGlcrUa_DT3bc3oAClR9YYO9W4l0K1bSOPeA0F2--9Fu7IUJUtrXkGaxFZNS7bvWhk4Ma084S6hHuSSnJR0GWopH_dupkNsVmIJg0HI_PWKbqMhgnlBqTAXNQNrBd5ac1qr3pXojQvIW08L-RO-Mv_JpgH-akj5Hb8ZSEqAqQZnvIbu4RnXnkLYw4ci9yfgMufuHtEk6P5EVVQA2Zk_QWTV1leQo-LfyrO2IO0ftUmv8viIwByyjVLUWTD_Kw-OLypu-DRW9giebSISK9XSsziW0fhTp3qbVM
+
+### GetUsers
+GET http://{{host}}:{{port}}/v1/users HTTP/1.1
+authorization: {{token}}
+
+
+### Get System
+GET http://{{host}}:{{port}}/v1/api/system HTTP/1.1
+authorization: {{token}}
+
+### Get Node
+GET http://{{host}}:{{port}}/v1/api/node/172.20.40.193 HTTP/1.1
+
+### Get Nodes
+GET http://{{host}}:{{port}}/v1/api/nodes HTTP/1.1
+authorization: {{token}}
+
+### Get Node
+GET http://{{host}}:{{port}}/v1/node HTTP/1.1
+
+### Set Config
+PUT http://{{host}}:{{port}}/v1/config HTTP/1.1
+content-type: application/json
+
+{
+  "config": {
+    "master": true,
+    "nodes": ["1", "333"],
+    "images": ["3", "4"]
+  }
+}
+
+### create container
+POST http://{{host}}:{{port}}/v1/api/container HTTP/1.1
+content-type: application/json
+
+{
+  "address": "172.20.40.193"
+}
+
+### List Images
+GET http://{{host}}:{{port}}/v1/images HTTP/1.1
+
+### List Containers
+GET http://{{host}}:{{port}}/v1/containers HTTP/1.1
+
+
+### Create Container
+POST http://{{host}}:{{port}}/v1/container HTTP/1.1
+content-type: application/json
+
+{
+    "image_name": "spch/nctts:latest",
+    "container_name": "test",
+    "user_id": "limyc"
+}
+
+@containerId=18d1ea1b0ca72e04df23bfcb1b6e0dd290b5aec5ce63d7db94a574e5b12e04fa
+### Stop Container
+PUT http://{{host}}:{{port}}/v1/container/stop/{{containerId}} HTTP/1.1
+
+
+### Delete Container
+DELETE http://{{host}}:{{port}}/v1/container/{{containerId}} HTTP/1.1

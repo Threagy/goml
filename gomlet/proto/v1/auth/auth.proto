@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+// https://cloud.google.com/apis/design/naming_convention
+
+import "proto/v1/auth/auth-common.proto";
+import "google/api/annotations.proto";
+// import "google/protobuf/empty.proto";
+
+package proto.auth;
+
+option go_package = "github.com/goml/gomlet/proto/v1/auth";
+
+service Auth {
+    //
+    rpc Login(LoginRequest) returns (LoginResponse) {
+        option (google.api.http) = {
+            post: "/v1/auth/login"
+            body: "*"
+        };
+    }
+
+    //
+    rpc NewUser(NewUserRequest) returns (NewUserResponse) {
+        option (google.api.http) = {
+            post: "/v1/auth/user"
+            body: "*"
+        };
+    }
+
+}

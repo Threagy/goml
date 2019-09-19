@@ -1,0 +1,92 @@
+syntax = "proto3";
+
+package proto.common;
+
+import "google/api/annotations.proto";
+import "protoc-gen-swagger/options/annotations.proto";
+
+option go_package = "github.com/goml/gomlet/proto/v1/common";
+
+message ImageSummary {
+    int64 containers = 1;
+    int64 created = 2;
+    string id = 3;
+    map<string,string> labels = 4;
+    string parent_id = 5;
+    repeated string repo_digests = 6;
+    repeated string repo_tags = 7;
+    int64 shared_size = 8;
+    int64 size = 9;
+    int64 virtual_size = 10;
+}
+
+message ImageInspect {
+    string Id = 1;
+    repeated string repo_tags = 2;
+    repeated string repo_digests = 3;
+    string parent = 4;
+    string comment = 5;
+    string created = 6;
+    string container = 7;
+    ContainerConfig container_config = 8;
+    string docker_version = 9;
+    string author = 10;
+    ContainerConfig config = 11;
+    string architecture = 12;
+    string os = 13;
+    string os_version = 14;
+    int64 size = 15;
+    int64 virtual_size = 16;
+}
+
+message ContainerConfig {
+    string hostname = 1;
+    string domainname = 2;
+    string user = 3;
+    repeated string exposed_ports = 4;
+    repeated string env = 5;
+    string image = 6;
+    repeated string volumes = 7;
+    string working_dir = 8;
+    map<string,string> labels = 10;
+}
+
+message Container {
+    string id = 1;
+    repeated string names = 2;
+    string image = 3;
+    string image_id = 4;
+    string command = 5;
+    int64 created = 6;
+    repeated Port ports = 7;
+    int64 size_rw = 8;
+    int64 size_root_fs = 9;
+    map<string, string> labels = 10;
+    string state = 11;
+    string status = 12;
+    NetworkMode host_config = 13;
+    repeated MountPoint mounts = 14;
+    repeated string env = 15;
+}
+
+message NetworkMode {
+    string network_mode = 1;
+}
+
+message Port {
+    string ip = 1;
+    int32 private_port = 2;
+    int32 public_port = 3;
+    string type = 4;
+}
+
+message MountPoint {
+    string type = 1;
+    string name = 2;
+    string source = 3;
+    string destination = 4;
+    string driver = 5;
+    string mode = 6;
+    bool rw = 7;
+    string propagation = 8;
+}

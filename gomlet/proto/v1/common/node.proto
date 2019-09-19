@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package proto.common;
+
+import "proto/v1/common/docker.proto";
+import "google/api/annotations.proto";
+import "protoc-gen-swagger/options/annotations.proto";
+
+option go_package = "github.com/goml/gomlet/proto/v1/common";
+
+message NodeSummary {
+    string id = 1;
+    string alias = 2;
+    string address = 4;
+    string hostname = 5;
+}
+
+message Node {
+    string id = 1;
+    string alias = 2;
+    string hostname = 3;
+    string address = 4;
+    int32 port = 5;
+    repeated GPUStatus gpu_statuses = 6;
+    repeated Container containers = 7;
+}
+
+message GPUStatus {
+    uint32 index = 1;
+    uint64 memory_total_size = 2;
+    uint64 memory_used_size = 3;
+    uint32 temperature = 4;
+}

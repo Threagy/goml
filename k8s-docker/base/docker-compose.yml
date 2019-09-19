@@ -1,0 +1,9 @@
+version: '3.4'
+
+services:
+  base-go-proto:
+    image: '${PRIVATE_REGISTRY}/base-go-proto:${VERSION}'
+    build:
+      context: ./go-proto
+      args:
+        PROTOBUF_VERSION: ${PROTOBUF_VERSION}

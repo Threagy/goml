@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+// https://cloud.google.com/apis/design/naming_convention
+
+import "proto/v1/gomlapi/gomlapi-common.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+
+package proto.gomlapi;
+
+option go_package = "github.com/goml/gomlet/proto/v1/gomlapi";
+
+service Gomlapi {
+    // Goml의 시스템 정보를 설정합니다.
+    rpc SetConfig(SetConfigRequest) returns (google.protobuf.Empty) {
+        option (google.api.http) = {
+            put: "/v1/api/config"
+            body: "*"
+        };
+    }
+
+    // Goml 시스템의 상태를 조회합니다.
+    rpc GetSystem(GetSystemRequest) returns (GetSystemResponse) {
+        option (google.api.http) = {
+            get: "/v1/api/system"
+        };
+    }
+
+    // Node 목록을 조회합니다.
+    rpc GetNodeList(GetNodeListRequest) returns (GetNodeListResponse) {
+        option (google.api.http) = {
+            get: "/v1/api/nodes"
+        };
+    }
+
+    // Node를 조회합니다.
+    rpc GetNode(GetNodeRequest) returns (GetNodeResponse) {
+        option (google.api.http) = {
+            get: "/v1/api/node/{node_address}"
+        };
+    }
+
+
+    // Node에 컨테이너를 생성합니다.
+    rpc CreateContainer(CreateContainerRequest) returns (CreateContainerResponse) {
+        option (google.api.http) = {
+            post: "/v1/api/container"
+            body: "*"
+        };
+    }
+
+    // 컨테이너를 시작합니다.
+    rpc StartContainer(StartContainerRequest) returns (google.protobuf.Empty) {
+        option (google.api.http) = {
+            put: "/v1/api/container/start/{node_id}/{container_id}"
+        };
+    }
+
+    // 컨테이너를 중지합니다.
+    rpc StopContainer(StopContainerRequest) returns (google.protobuf.Empty) {
+        option (google.api.http) = {
+            put: "/v1/api/container/stop/{node_id}/{container_id}"
+        };
+    }
+
+    // 컨테이너를 삭제합니다.
+    rpc DeleteContainer(DeleteContainerRequest) returns (google.protobuf.Empty) {
+        option (google.api.http) = {
+            delete: "/v1/api/container/{node_id}/{container_id}"
+        };
+    }
+}

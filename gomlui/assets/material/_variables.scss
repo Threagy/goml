@@ -1,0 +1,87 @@
+
+//  Brand Colors
+$brand-primary:                    $purple !default;
+$brand-success:                    $green !default;
+$brand-danger:                     $red !default;
+$brand-warning:                    $orange !default;
+$brand-info:                       $cyan !default;
+$brand-general:                    $blue !default;
+
+// Paddings
+$padding-logo:                      15px !default;
+$padding-avatar-title:              5px  !default;
+$padding-x-footer:                  24px !default;
+
+// Line Height
+$line-height:                       30px !default;
+$line-height-base:                  1.5em !default;
+$line-height-footer-items:          1.8 !default;
+$line-height-higher:                22px !default;
+$line-height-high:                  56px !default;
+
+// Font size
+$font-size-mini:                    9px !default;
+$font-size-small:                   12px !default;
+$font-size-default:                 14px !default;
+$font-size-avatar-title:            18px !default;
+$font-size-alert-icon:              30px !default;
+$font-size-big:                     36px !default;
+$font-size-small-tag:               65% !default;
+$font-size-toolbar-title:           $font-size-avatar-title;
+$font-size-toolbar-items:           20px !default;
+$font-size-h1:                      3.3125rem;
+$font-size-h2:                      2.25rem !default;
+$font-size-h3:                      1.5625rem;
+$font-size-h4:                      1.125rem !default;
+$font-size-h5:                      1.0625rem !default;
+$font-size-h6:                      0.75rem !default;
+$font-paragraph:                    $font-size-default !default;
+$font-size-chart-label:             .730rem !default;
+
+// Font Weight
+$font-weight-lighter:               300 !default;
+$font-weight-base:                  400 !default;
+$font-weight-bolder:                500 !default;
+
+// Opacity Colors
+$black-opacity-3:                   rgba(180, 180, 180, .3) !default;
+
+// Image from Avatar
+$top-dim:                           1px !default;
+
+// Shadows
+$mdb-shadow-key-umbra-opacity:      .2  !default;
+$mdb-shadow-key-penumbra-opacity:   .14 !default;
+$mdb-shadow-ambient-shadow-opacity: .12 !default;
+
+// Sidebar List Items
+$padding-small:                     10px !default;
+$padding-general:                   15px !default;
+$margin-general:                    $padding-general;
+$margin-small:                      $padding-small;
+$font-size-general:                 14px !default;
+$list-item-hover:                   rgba(200, 200, 200, .2) !default;
+$list-item-icon-opacity:            .8 !default;
+$list-item-height:                  48px !default;
+$badge-border:                      1px solid $white !default;
+$badge-dimension:                   20px !default;
+
+// Border Radius
+$border-radius-base:                3px !default;
+
+// Sidebar Avatar Margins
+$margin-list-right:                 11px !default;
+$margin-list-left:                  25px !default;
+
+// Sidebar Divider
+$divider-width:                     calc(100% - 8px) !default;
+$divider-margins:                   -1px !default;
+$divider-border:                    1px solid #eee;
+
+// Sidebar Background
+$sidebar-bg:                        rgba(27, 27, 27, .74) !default;
+
+// Sidebar List Items Icons
+$icon-width:                        $line-height;
+
+

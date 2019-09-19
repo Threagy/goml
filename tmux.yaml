@@ -1,0 +1,18 @@
+session_name: 'Goml'
+start_directory: './k8s-docker'
+before_script: "./k8s-docker/scripts/tmux_before.sh"
+windows:
+- focus: 'true'
+  layout: 8438,229x60,0,0{132x60,0,0[132x30,0,0,0,132x29,0,31,3],96x60,133,0,2}
+  options: {}
+  panes:
+  - shell_command: 
+      - docker-compose -f docker-compose.workspace.yml exec workspace bash
+      - cd goml/gomlet
+      - make run
+  - focus: 'true'
+    shell_command: 
+      - docker-compose -f docker-compose.workspace.yml exec workspace bash
+      - cd goml/gomlctl
+  - 
+  window_name: Dev

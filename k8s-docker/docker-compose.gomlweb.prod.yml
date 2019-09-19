@@ -1,0 +1,13 @@
+version: '2.3'
+
+services:
+  metalicaweb:
+    image: '${PRIVATE_REGISTRY}/metalicaweb:${VERSION}'
+    build:
+      context: .
+      dockerfile: ./gomlweb/prod.Dockerfile
+    hostname: gomlweb
+    ports:
+      - '7778:8080'
+    environment:
+      - COMPOSE_PROJECT_NAME=${COMPOSE_PROJECT_NAME}

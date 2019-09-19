@@ -1,0 +1,3 @@
+db:
+  uri: "mongodb://goml:goml@172.19.148.170:30927/goml_dev"
+  dbname: "goml_dev"

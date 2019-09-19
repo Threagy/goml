@@ -1,0 +1,104 @@
+syntax = "proto3";
+
+package proto.gomlapi;
+
+import "proto/v1/common/docker.proto";
+import "proto/v1/common/node.proto";
+import "google/api/annotations.proto";
+import "protoc-gen-swagger/options/annotations.proto";
+
+option go_package = "github.com/goml/gomlet/proto/v1/gomlapi";
+
+/////////////////////////////////////////////////////////////
+// Request-Response
+
+// SetConfig
+message SetConfigRequest {
+    Config config = 1;
+}
+
+// GetSystem
+message GetSystemRequest {
+}
+
+message GetSystemResponse {
+    System system = 1;
+}
+
+// GetNodeList
+message GetNodeListRequest {
+}
+
+message GetNodeListResponse {
+    repeated proto.common.Node nodes = 1;
+}
+
+// CreateContainer
+message CreateContainerRequest {
+    string node_id = 1;
+    string image_name = 2;
+    string container_name = 3;
+    map<string, string> labels = 4;
+    map<string, string> volumes = 5;
+    repeated string envs = 6;
+    map<int32, string> ports = 7;
+    bool auto_port = 8;
+}
+
+message CreateContainerResponse {
+    string id = 1;
+    repeated string warnings = 2;
+}
+
+// GetNode
+message GetNodeRequest {
+    string node_address = 1;
+}
+
+message GetNodeResponse {
+    string node_id = 1;
+    string node_alias = 2;
+    string hostname = 3;
+    string address = 4;
+}
+
+// StartContainer
+message StartContainerRequest {
+    string node_id = 1;
+    string container_id = 2;
+}
+
+// StopContainer
+message StopContainerRequest {
+    string node_id = 1;
+    string container_id = 2;
+}
+
+// DeleteContainer
+message DeleteContainerRequest {
+    string node_id = 1;
+    string container_id = 2;
+}
+
+/////////////////////////////////////////////////////////////
+// Common
+
+message System {
+    Config config = 1;
+    GomlapiState state = 2;
+    repeated string logs = 3;
+}
+
+enum GomlapiState {
+    IDLE = 0;
+    INITIALIZING = 1;
+    IMAGE_PULLING = 2;
+    IMAGE_PULLING_FAIL = 3;
+}
+
+message Config {
+    string node_id = 1;
+    repeated proto.common.NodeSummary nodes = 2;
+    repeated string images = 3;
+    repeated proto.common.ImageInspect image_inspects = 4;
+}
