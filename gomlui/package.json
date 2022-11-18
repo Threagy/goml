@@ -23,7 +23,7 @@
     "js-cookie": "^2.2.1",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.15",
-    "nuxt": "^2.8.1",
+    "nuxt": "^2.15.8",
     "prismjs": "^1.17.1",
     "vue-avatar": "^2.1.7",
     "vue-chartist": "^2.2.1",
